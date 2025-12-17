@@ -1,4 +1,4 @@
-import { getResurs } from '../services/services.js';
+import { API_URL, getResurs } from '../services/services.js';
 
 function cards() {
   class MenuCard {
@@ -42,7 +42,7 @@ function cards() {
     }
   }
 
-  getResurs('http://localhost:3001/menu').then((data) =>
+  getResurs(API_URL).then((data) =>
     data.forEach(({ img, alt, title, descr, price }) => {
       new MenuCard(img, alt, title, descr, price, '.menu .container').render();
     }),
