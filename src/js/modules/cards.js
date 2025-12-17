@@ -1,4 +1,5 @@
-import { getResurs } from "../services/services";
+import { getResurs } from '../services/services.js';
+
 function cards() {
   class MenuCard {
     constructor(src, alt, title, descr, price, parentSelector, ...classes) {
@@ -18,10 +19,10 @@ function cards() {
     }
 
     render() {
-      const element = document.createElement("div");
+      const element = document.createElement('div');
 
       if (this.classes.length === 0) {
-        element.classList.add("menu__item");
+        element.classList.add('menu__item');
       } else {
         this.classes.forEach((className) => element.classList.add(className));
       }
@@ -34,25 +35,17 @@ function cards() {
                       <div class="menu__item-divider"></div>
                       <div class="menu__item-price">
                           <div class="menu__item-cost">Цена:</div>
-                          <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                          <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
                       </div>
                       `;
       this.parent.append(element);
     }
   }
 
-  getResurs("http://localhost:3000/menu").then((data) =>
-    data.forEach(({ img, alt, img, title, descr, price }) => {
-      new MenuCard(
-        img,
-        alt,
-        img,
-        title,
-        descr,
-        price,
-        ".menu .container"
-      ).render();
-    })
+  getResurs('http://localhost:3001/menu').then((data) =>
+    data.forEach(({ img, alt, title, descr, price }) => {
+      new MenuCard(img, alt, title, descr, price, '.menu .container').render();
+    }),
   );
 }
 

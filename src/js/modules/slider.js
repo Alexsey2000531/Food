@@ -1,13 +1,4 @@
-function slider({
-  container,
-  slide,
-  nextArrow,
-  prevArrow,
-  totalCounter,
-  currentCounter,
-  wrapper,
-  field,
-}) {
+function slider({ container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field }) {
   const prev = document.querySelector(prevArrow),
     next = document.querySelector(nextArrow),
     slider = document.querySelector(container),
@@ -28,20 +19,20 @@ function slider({
     current.textContent = slideIndex;
   }
 
-  slidesField.style.width = 100 * slides.length + "%";
-  slidesField.style.display = "flex";
-  slidesField.style.transition = "0.5s all";
+  slidesField.style.width = 100 * slides.length + '%';
+  slidesField.style.display = 'flex';
+  slidesField.style.transition = '0.5s all';
 
-  wrapperInner.style.overflow = "hidden";
+  wrapperInner.style.overflow = 'hidden';
   slides.forEach((slide) => {
     slide.style.width = width;
   });
 
-  slider.style.position = "relative";
+  slider.style.position = 'relative';
 
-  const dots = document.createElement("ol"),
+  const dots = document.createElement('ol'),
     indecators = [];
-  dots.classList.add("carousel-indicators");
+  dots.classList.add('carousel-indicators');
   dots.style.cssText = `
 position: absolute;
   right: 0;
@@ -58,8 +49,8 @@ position: absolute;
   slider.append(dots);
 
   for (let i = 0; i < slides.length; i++) {
-    const dot = document.createElement("li");
-    dot.setAttribute("data-slide-to", i + 1);
+    const dot = document.createElement('li');
+    dot.setAttribute('data-slide-to', i + 1);
     dot.style.cssText = `
    box-sizing: content-box;
   flex: 0 1 auto;
@@ -83,7 +74,7 @@ position: absolute;
   }
 
   function deleteNotDigit(str) {
-    return +str.replace(/\D/g, "");
+    return +str.replace(/\D/g, '');
   }
 
   function getZeroSlides() {
@@ -96,12 +87,12 @@ position: absolute;
 
   function setStyleIndecators() {
     indecators.forEach((indecator) => {
-      indecator.style.opacity = ".5";
+      indecator.style.opacity = '.5';
     });
     indecators[slideIndex - 1].style.opacity = 1;
   }
 
-  next.addEventListener("click", () => {
+  next.addEventListener('click', () => {
     if (offset == deleteNotDigit(width) * (slides.length - 1)) {
       offset = 0;
     } else {
@@ -119,7 +110,7 @@ position: absolute;
     setStyleIndecators();
   });
 
-  prev.addEventListener("click", () => {
+  prev.addEventListener('click', () => {
     if (offset == 0) {
       offset = deleteNotDigit(width) * (slides.length - 1);
     } else {
@@ -139,8 +130,8 @@ position: absolute;
   });
 
   indecators.forEach((indecator) => {
-    indecator.addEventListener("click", (e) => {
-      const sliderTo = e.target.getAttribute("data-slide-to");
+    indecator.addEventListener('click', (e) => {
+      const sliderTo = e.target.getAttribute('data-slide-to');
 
       slideIndex = sliderTo;
       offset = deleteNotDigit(width) * (sliderTo - 1);

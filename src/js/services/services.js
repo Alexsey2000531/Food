@@ -1,8 +1,8 @@
 const postData = async (url, data) => {
   const res = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-type": "application/json",
+      'Content-type': 'application/json',
     },
     body: data,
   });

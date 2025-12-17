@@ -50,9 +50,9 @@ npm install -g json-server
 ### 4. Запустите json-server
 
 ```sh
-json-server --watch db.json --port 3000
+json-server --watch db.json --port 3001
 ```
-API будет доступно по адресу: http://localhost:3000
+API будет доступно по адресу: http://localhost:3001
 
 ### 5. Запустите Live Server
 
