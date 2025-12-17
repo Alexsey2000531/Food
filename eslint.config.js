@@ -25,7 +25,6 @@ export default [
       'no-unused-vars': 'error',
       semi: ['error', 'always'],
       quotes: ['error', 'single'],
-      indent: ['error', 2],
       'comma-dangle': ['error', 'always-multiline'],
       'object-curly-spacing': ['error', 'always'],
       'array-bracket-spacing': ['error', 'never'],
