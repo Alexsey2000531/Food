@@ -1,10 +1,10 @@
-import { API_URL, getResurs } from '../services/services.js';
+import { getMenu } from '../services/services.js';
 
 function cards() {
   class MenuCard {
-    constructor(src, alt, title, descr, price, parentSelector, ...classes) {
+    constructor(src, altimg, title, descr, price, parentSelector, ...classes) {
       this.src = src;
-      this.alt = alt;
+      this.altimg = altimg;
       this.title = title;
       this.descr = descr;
       this.price = price;
@@ -27,7 +27,7 @@ function cards() {
         this.classes.forEach((className) => element.classList.add(className));
       }
 
-      element.innerHTML = `<img src="${this.src}" alt="${this.alt}">
+      element.innerHTML = `<img src="${this.src}" alt="${this.altimg}">
                       <h3 class="menu__item-subtitle">"${this.title}"</h3>
                       <div class="menu__item-descr">“${this.descr}” - это тщательный подбор ингредиентов: полное отсутствие
                           продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное
@@ -42,11 +42,20 @@ function cards() {
     }
   }
 
-  getResurs(API_URL).then((data) =>
-    data.forEach(({ img, alt, title, descr, price }) => {
-      new MenuCard(img, alt, title, descr, price, '.menu .container').render();
-    }),
-  );
+  getMenu()
+    .then((menuItems) => {
+      if (!Array.isArray(menuItems)) {
+        throw new Error(`Ожидался массив, но получен ${typeof menuItems}: ${JSON.stringify(menuItems)}`);
+      }
+
+      menuItems.forEach((item) => {
+        new MenuCard(item.img, item.altimg, item.title, item.descr, item.price, '.menu .container').render();
+      });
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error('Ошибка загрузки меню:', err);
+    });
 }
 
 export default cards;

@@ -12,6 +12,15 @@ const postData = async (url, data) => {
   return await res.json();
 };
 
+async function getMenu() {
+  const data = await getResurs(API_URL);
+  if (!data.menu) {
+    throw new Error('В данных не найдено свойство "menu"');
+  }
+
+  return data.menu;
+}
+
 async function getResurs(url) {
   const res = await fetch(url);
 
@@ -22,5 +31,4 @@ async function getResurs(url) {
   return await res.json();
 }
 
-export { postData };
-export { getResurs };
+export { postData, getResurs, getMenu };
