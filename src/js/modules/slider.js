@@ -75,16 +75,22 @@ position: absolute;
     indecators.push(dot);
   }
 
-  function deleteNotDigit(str) {
-    return +str.replace(/\D/g, '');
-  }
-
   function getZeroSlides() {
     if (slides.length < 10) {
       current.textContent = `0${slideIndex}`;
     } else {
       current.textContent = slideIndex;
     }
+  }
+
+  function goToSlide(index) {
+    slideIndex = index;
+    offset = width * (slideIndex - 1);
+
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+    getZeroSlides();
+    setStyleIndecators();
   }
 
   function setStyleIndecators() {
@@ -95,52 +101,24 @@ position: absolute;
   }
 
   next.addEventListener('click', () => {
-    if (offset == deleteNotDigit(width) * (slides.length - 1)) {
-      offset = 0;
+    if (slideIndex >= slides.length) {
+      goToSlide(1);
     } else {
-      offset += deleteNotDigit(width);
+      goToSlide(slideIndex + 1);
     }
-    slidesField.style.transform = `translateX(-${offset}px)`;
-
-    if (slideIndex == slides.length) {
-      slideIndex = 1;
-    } else {
-      slideIndex += 1;
-    }
-
-    getZeroSlides();
-    setStyleIndecators();
   });
 
   prev.addEventListener('click', () => {
-    if (offset == 0) {
-      offset = deleteNotDigit(width) * (slides.length - 1);
+    if (slideIndex <= 1) {
+      goToSlide(slides.length);
     } else {
-      offset -= deleteNotDigit(width);
+      goToSlide(slideIndex - 1);
     }
-
-    slidesField.style.transform = `translateX(-${offset}px)`;
-
-    if (slideIndex == 1) {
-      slideIndex = slides.length;
-    } else {
-      slideIndex -= 1;
-    }
-
-    getZeroSlides();
-    setStyleIndecators();
   });
 
-  indecators.forEach((indecator) => {
-    indecator.addEventListener('click', (e) => {
-      const sliderTo = e.target.getAttribute('data-slide-to');
-
-      slideIndex = sliderTo;
-      offset = deleteNotDigit(width) * (sliderTo - 1);
-
-      slidesField.style.transform = `translateX(-${offset}px)`;
-
-      getZeroSlides();
+  indecators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      goToSlide(index + 1);
     });
   });
 
