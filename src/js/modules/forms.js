@@ -4,7 +4,7 @@ import { postData } from '../services/services.js';
 function forms(formsSelector, modalTimerId) {
   const forms = document.querySelectorAll(formsSelector);
   const message = {
-    loading: 'icons/spinner.svg',
+    loading: 'src/icons/spinner.svg',
     success: 'Спасибо. Скоро мы с вами свяжемся',
     failure: 'Что-то пошло не так...',
   };
