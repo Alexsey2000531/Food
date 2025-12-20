@@ -7,7 +7,7 @@ function slider({ container, slide, nextArrow, prevArrow, totalCounter, currentC
     total = document.querySelector(totalCounter),
     wrapperInner = document.querySelector(wrapper),
     slidesField = document.querySelector(field),
-    width = window.getComputedStyle(wrapperInner).width;
+    width = wrapperInner.clientWidth;
   let slideIndex = 1;
   let offset = 0;
 
@@ -21,11 +21,13 @@ function slider({ container, slide, nextArrow, prevArrow, totalCounter, currentC
 
   slidesField.style.width = 100 * slides.length + '%';
   slidesField.style.display = 'flex';
-  slidesField.style.transition = '0.5s all';
+  slidesField.style.transition = '0.5s ease';
 
   wrapperInner.style.overflow = 'hidden';
+
   slides.forEach((slide) => {
-    slide.style.width = width;
+    slide.style.width = width + 'px';
+    slide.style.flexShirk = '0';
   });
 
   slider.style.position = 'relative';
@@ -139,6 +141,13 @@ position: absolute;
       slidesField.style.transform = `translateX(-${offset}px)`;
 
       getZeroSlides();
+    });
+  });
+
+  // При изменения размера экрана делаем перерасчёт
+  window.addEventListener('resize', () => {
+    slides.forEach((slide) => {
+      slide.style.width = width + 'px';
     });
   });
 }

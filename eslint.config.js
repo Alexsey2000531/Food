@@ -30,5 +30,5 @@ export default [
       'array-bracket-spacing': ['error', 'never'],
     },
   },
-  { ignores: ['/dist', '/node_modules', 'eslint.config.js', 'webpack.config.js'] },
+  { ignores: ['./dist', '/node_modules', 'eslint.config.js', 'webpack.config.js'] },
 ];
